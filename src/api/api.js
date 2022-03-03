@@ -30,7 +30,6 @@ export const auth = async (email, password) => {
         .then(res => {
             setToken(res.data.token);
             setUsername(res.data.username);
-            console.log(res.data);
         }).catch(err => {
             console.error(err);
         });

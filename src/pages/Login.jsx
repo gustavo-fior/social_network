@@ -1,7 +1,14 @@
 import React from "react";
 import { useState } from "react";
 import { auth, getUsername } from "../api/api";
-import { Button, Grid, Link, Paper, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  Grid,
+  Link,
+  Paper,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -29,8 +36,9 @@ const Login = () => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              auth(email, password);
-              navigate("/user/" + getUsername());
+              auth(email, password).then(() => {
+                navigate("/user/" + getUsername());
+              });
             }}
           >
             <TextField
@@ -58,7 +66,10 @@ const Login = () => {
             </Grid>
           </form>
           <Grid align="center">
-          Doesn't have an account? <Link href="/signup" underline="hover">Sign up!</Link> 
+            Don't have an account?{" "}
+            <Link href="/signup" underline="hover">
+              Sign up!
+            </Link>
           </Grid>
         </Paper>
       </Grid>
