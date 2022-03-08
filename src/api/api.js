@@ -52,24 +52,18 @@ export const signUp = async (email, username, password) => {
 
 export const makePost = async (content) => {
 
-    const body = {
-        content: content,
-        token: getToken()
-    }
-
     const header = {
         headers: {
             "Authorization": "Bearer " + getToken()
         }
     }
 
-    await api.post("/post", body, header)
-        .then(res => {
-            const name = res.data.username;
-            return name
-        }).catch(err => {
-            console.error(err);
-        })
+    const body = {
+        content: content,
+        token: getToken()
+    }
+
+    await api.post("/post", body, header);
 
 }
 
@@ -82,7 +76,56 @@ export const getUser = async (username) => {
     }
 
     await api.get(`/user/${username}`, header).then(res => {
-        console.log(res.data); 
+        console.log(res.data);
+    }).catch(err => {
+        console.error(err);
+    })
+
+}
+
+export const getHome = async (setDado) => {
+
+    const header = {
+        headers: {
+            "Authorization": "Bearer " + getToken()
+        }
+    }
+
+    await api.get(`/home`, header).then(res => {
+        console.log(res.data);
+        setDado(res.data);
+    }).catch(err => {
+        console.error(err);
+    })
+
+}
+
+export const getPosts = async (username, setDado) => {
+
+    const header = {
+        headers: {
+            "Authorization": "Bearer " + getToken()
+        }
+    }
+
+    await api.get(`/post/${username}`, header).then(res => {
+        setDado(res.data);
+    }).catch(err => {
+        console.error(err);
+    })
+
+}
+
+export const likePost = async (id) => {
+
+    const header = {
+        headers: {
+            "Authorization": "Bearer " + getToken()
+        }
+    }
+
+    await api.post(`/post/like/${id}`, {}, header).then(res => {
+        console.log(res.data);
     }).catch(err => {
         console.error(err);
     })

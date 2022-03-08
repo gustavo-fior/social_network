@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { auth, getUsername } from "../api/api";
+import { auth, getHome, getUsername } from "../api/api";
 import {
   Button,
   Grid,
@@ -37,7 +37,7 @@ const Login = () => {
             onSubmit={(e) => {
               e.preventDefault();
               auth(email, password).then(() => {
-                navigate("/user/" + getUsername());
+                navigate("/home");
               });
             }}
           >
