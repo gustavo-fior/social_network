@@ -67,22 +67,6 @@ export const makePost = async (content) => {
 
 }
 
-export const getUser = async (username) => {
-
-    const header = {
-        headers: {
-            "Authorization": "Bearer " + getToken()
-        }
-    }
-
-    await api.get(`/user/${username}`, header).then(res => {
-        console.log(res.data);
-    }).catch(err => {
-        console.error(err);
-    })
-
-}
-
 export const getHome = async (setDado) => {
 
     const header = {
@@ -116,7 +100,7 @@ export const getPosts = async (username, setDado) => {
 
 }
 
-export const likePost = async (id) => {
+export const likePost = async (id, setLiked) => {
 
     const header = {
         headers: {
@@ -125,9 +109,56 @@ export const likePost = async (id) => {
     }
 
     await api.post(`/post/like/${id}`, {}, header).then(res => {
-        console.log(res.data);
+        if (res.status === 200) {
+            setLiked(true);
+        }
     }).catch(err => {
         console.error(err);
     })
+
+}
+
+export const unlikePost = async (id, setLiked) => {
+
+    const header = {
+        headers: {
+            "Authorization": "Bearer " + getToken()
+        }
+    }
+
+    await api.post(`/post/unlike/${id}`, {}, header).then(res => {
+        if (res.status === 200) {
+            setLiked(false);
+        }
+    }).catch(err => {
+        console.error(err);
+    })
+
+}
+
+export const getLikesFromPost = async (postId, setLikes) => {
+
+    const header = {
+        headers: {
+            "Authorization": "Bearer " + getToken()
+        }
+    }
+
+    await api.get(`/post/likes/${postId}`, header).then(res => {
+        setLikes(res.data.totalLikes);
+    }).catch(err => {
+        console.error(err);
+    });
+}
+
+export const deletePost = async (postId) => {
+
+    const header = {
+        headers: {
+            "Authorization": "Bearer " + getToken()
+        }
+    }
+
+    await api.post(`/post/delete`, { id: postId }, header);
 
 }

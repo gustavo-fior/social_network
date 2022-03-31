@@ -16,7 +16,7 @@ const UserPage = () => {
     return (
         <Grid container justifyContent={"center"}>
             <Container justify="center" sx={{ margin: 3 }} maxWidth="md">
-                <Typography variant="h3">@{username}´s profile</Typography>
+                <Typography variant="h3"><strong>@</strong>{username}´s profile</Typography>
                 {posts.map((post, index) => (
                     <>
                         <Post key={index} post={post} />

@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { getUser, makePost, signUp } from "../api/api";
+import { signUp } from "../api/api";
 import Button from "@mui/material/Button";
 import { Grid, Link, Paper, TextField, Typography } from "@mui/material";
 
@@ -28,9 +28,7 @@ const Login = () => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              getUser(username);
-              //makePost(username);
-              //signUp(email, username, password);
+              signUp(email, username, password);
             }}
           >
             <TextField

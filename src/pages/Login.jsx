@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { auth, getHome, getUsername } from "../api/api";
+import { auth } from "../api/api";
 import {
   Button,
   Grid,
